@@ -1,0 +1,32 @@
+﻿@model LMS.Core.Models.Course
+
+<div class="card p-0" id="course">
+    <div class="container">
+        <div class="row">
+            <div id="courseButtonCol" class="col p-0">
+                <a type="submit" class="btn btn-block text-left btn-light" asp-action="GetModulesByCourseId" asp-route-id="@Model.Id"
+                   data-ajax="true"
+                   data-ajax-method="GET"
+                   data-ajax-mode="replace"
+                   data-ajax-update="@("#moduledestination"+Model.Id)"
+                   data-toggle="collapse" data-target="@("#moduledestination"+Model.Id)" aria-expanded="true" aria-controls="@("moduledestination"+Model.Id)">
+                    <div class="row card-text">
+                        <div class="col-3"><b>@Html.DisplayFor(modelItem => Model.Name)</b></div>
+                        <div class="col">@Html.DisplayFor(modelItem => Model.StartDateTime) - @Html.DisplayFor(modelItem => Model.EndDateTime)</div>
+                    </div>
+                </a>
+            </div>
+            @if (User.IsInRole("Admin") || User.IsInRole("Lärare"))
+            {
+                <div id="teacherButtonCol" class="col-2 text-right pr-0">
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-secondary course" asp-controller="Courses" asp-action="Edit" asp-route-id="@Model.Id">Ändra</a>
+                        <a class="btn btn-sm btn-outline-secondary course" asp-controller="Courses" asp-action="Delete" asp-route-id="@Model.Id">Radera</a>
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="@("moduledestination"+Model.Id)" class="collapse">
+        </div>
+    </div>
+</div>

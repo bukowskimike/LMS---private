@@ -1,0 +1,13 @@
+﻿body {
+}
+.btn-light, .course:hover {
+    background-color: #c78d0e;
+    color: white;
+}
+.btn-outline-light, .module:hover {
+    background-color: #e28f00;
+}
+.btn-outline-warning, .activity:hover {
+    background-color: #ffbc00;
+    color: white;
+}

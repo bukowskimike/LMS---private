@@ -1,0 +1,35 @@
+﻿@model IEnumerable<LMS.Core.Models.Module>
+
+<div class="row pt-4">
+    <div class="col-8">
+        <h6>Kursbeskrivning</h6>
+        <p>
+            @ViewBag.course.Description
+        </p>
+    </div>
+
+    <div class="col-4">
+        <div class="row">
+            <div class="col-7"><h6>Kursdokument</h6></div>
+            <a class="btn btn-sm btn-outline-secondary module text-right" asp-controller="Documents" asp-action="CreateCourseDocument" asp-route-id="@ViewBag.course.Id">Skapa dokument</a>
+        </div>
+        <p>
+            <partial name="_DocumentsPartial" model="@ViewBag.course.Documents" />
+        </p>
+    </div>
+</div>
+
+
+<div class="row card-body">
+    <div class="col-3"><h5>Moduler</h5></div>
+    @if (User.IsInRole("Admin") || User.IsInRole("Lärare"))
+    {
+        <div>
+            <a class="btn btn-sm btn-outline-secondary module" asp-controller="Modules" asp-action="Create" asp-route-id="@ViewBag.course.Id">Skapa ny modul</a>
+        </div>
+    }
+</div>
+@foreach (var item in Model)
+{
+    <partial name="_ModulePartial" model="item" />
+}

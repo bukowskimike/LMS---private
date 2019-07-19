@@ -1,0 +1,101 @@
+﻿@model IEnumerable<LMS.Core.ViewModels.StudentsViewModel>
+
+@{
+    ViewData["Title"] = "Användare";
+}
+
+<h5>Kursdeltagare</h5>
+
+
+
+
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Lärare"))
+    {
+        <div class="container pt-2">
+            <div class="row">
+                <div class="col-3"><h6>Lärare</h6></div>
+                
+                <a class="btn btn-sm btn-outline-secondary" href="/Identity/Account/Register">Skapa ny lärare</a>
+            </div>
+            <hr />
+        </div>
+        <div class="card-body ml-4 pt-0">
+
+            @foreach (var item in Model)
+            {
+                if (item.Course == null)
+                {
+                    <div class="row">
+                        <div class="col-3">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </div>
+
+                        <div class="col">@Html.DisplayFor(modelItem => item.Email)</div>
+
+                        <div class="col-2 text-right pr-0">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id">Ändra</a>
+                                <a class="btn btn-sm btn-outline-secondary" asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            }
+        </div>
+
+
+    }
+
+    @foreach (var course in ViewBag.Courses)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <h6>Elever i @course.Name</h6>
+                </div>
+                @if (User.IsInRole("Admin") || User.IsInRole("Lärare"))
+                {
+                    <a class="btn btn-sm btn-outline-secondary" href="/Identity/Account/Register?id=@course.Id">Skapa ny elev</a>
+                }
+            </div>
+            <hr />
+        </div>
+
+        <div class="card-body ml-4 pt-0">
+            @foreach (var item in Model)
+            {
+                if (item.Course == course.Name)
+                {
+
+
+                    <div class="row">
+                        <div class="col-3">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </div>
+
+                        <div class="col">
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </div>
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Lärare"))
+                        {
+
+                            <div class="col-2 text-right pr-0">
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id">Ändra</a>
+                                    <a class="btn btn-sm btn-outline-secondary" asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                }
+            }
+        </div>
+
+    }

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<LMS.Core.Models.Course>
+
+<div class="row">
+    <div class="col-3"><h5>Kurser</h5></div>
+    @if (User.IsInRole("Admin") || User.IsInRole("Lärare"))
+    {
+        <p>
+            <a class="btn btn-sm btn-outline-secondary course" asp-controller="Courses" asp-action="Create">Skapa ny kurs</a>
+        </p>
+    }
+</div>
+
+@foreach (var item in Model)
+{
+    <partial name="_CoursePartial" model="item" />
+}

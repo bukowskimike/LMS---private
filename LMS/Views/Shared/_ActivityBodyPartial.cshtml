@@ -1,0 +1,21 @@
+﻿@model IEnumerable<LMS.Core.Models.Activity>
+
+<div class="row pt-4">
+    <div class="col-8">
+        <h6>Beskrivning</h6>
+        <p>
+            @ViewBag.activity.Description
+        </p>
+    </div>
+    <div class="col-4">
+        <div class="row">
+            <div class="col-7 p-0">
+                <h6>Aktivitetsdokument</h6>
+            </div>
+            <a class="btn btn-sm btn-outline-secondary module text-right" asp-controller="Documents" asp-action="CreateActivityDocument" asp-route-id="@ViewBag.activity.Id">Skapa dokument</a>
+        </div>
+        <p>
+            <partial name="_DocumentsPartial" model="@ViewBag.activity.Documents" />
+        </p>
+    </div>
+</div>

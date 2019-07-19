@@ -1,0 +1,15 @@
+﻿@model LMS.Core.ViewModels.FilesViewModel
+
+<p>Lista på nedladdade filer</p>
+
+<ul>
+    @foreach (var item in Model.Files)
+    {
+        <li>
+            <a asp-controller="Documents" asp-action="Download"
+               asp-route-filename="@item.Name">
+                @item.Name
+            </a>
+        </li>
+    }
+</ul>

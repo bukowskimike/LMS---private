@@ -1,0 +1,8 @@
+﻿@model IEnumerable<LMS.Core.Models.Document>
+
+    <form asp-action="UploadFile" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <input name="FileToUpload" type="file" />
+            <button type="submit">Ladda upp</button>
+        </div>
+    </form>

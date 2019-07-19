@@ -1,0 +1,62 @@
+﻿@model LMS.Core.ViewModels.LmsViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+    <h1>Skapa ny aktivitet</h1>
+
+<h4>Aktivitet</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <p>Modulperioden är @Model.ModuleStart.ToShortDateString() till @Model.ModuleEnd.ToShortDateString().</p>
+            <div class="form-group">
+                <label asp-for="StartDateTime" class="control-label"></label>
+                <input asp-for="StartDateTime" class="form-control" />
+                <span asp-validation-for="StartDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndDateTime" class="control-label"></label>
+                <input asp-for="EndDateTime" class="form-control" />
+                <span asp-validation-for="EndDateTime" class="text-danger"></span>
+            </div>
+            <input asp-for="ModuleId" type="hidden" />
+            <div class="form-group">
+                <label asp-for="ActivityTypeId" class="control-label"></label>
+                <select asp-for="ActivityTypeId" class="form-control" asp-items="ViewBag.ActivityTypeId"></select>
+            </div>
+            <div class="form-group">
+                <input asp-for="ModuleStart" type="hidden" />
+                <span asp-validation-for="ModuleStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="ModuleEnd" type="hidden" />
+                <span asp-validation-for="ModuleEnd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Skapa" class="btn btn-outline-secondary activity" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Courses" asp-action="MainIndex">Tillbaka till listan</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

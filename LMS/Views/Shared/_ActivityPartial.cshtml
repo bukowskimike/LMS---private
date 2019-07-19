@@ -1,0 +1,28 @@
+﻿@model LMS.Core.Models.Activity
+
+<div class="row">
+    <div id="moduleButtonCol" class="col p-0">
+        <a type="submit" class="btn btn-outline-warning btn-block text-left" asp-action="GetActivityBody" asp-route-id="@Model.Id"
+           data-ajax="true"
+           data-ajax-method="GET"
+           data-ajax-mode="replace"
+           data-ajax-update="@("#activitybodydestination"+Model.Id)"
+           data-toggle="collapse" data-target="@("#activitybodydestination"+Model.Id)" aria-expanded="true" aria-controls="@("activitybodydestination"+Model.Id)">
+            <div class="row card-text">
+                <div class="col-3">@Html.DisplayFor(modelItem => Model.Name)</div>
+                <div class="col">@Html.DisplayFor(modelItem => Model.StartDateTime) - @Html.DisplayFor(modelItem => Model.EndDateTime)</div>
+            </div>
+        </a>
+    </div>
+    @if (User.IsInRole("Admin") || User.IsInRole("Lärare"))
+    {
+        <div id="teacherButtonCol" class="col-2 text-right pr-0">
+            <div class="btn-group">
+                <a class="btn btn-sm btn-outline-secondary activity" asp-controller="Activities" asp-action="Edit" asp-route-id="@Model.Id">Ändra</a>
+                <a class="btn btn-sm btn-outline-secondary activity" asp-controller="Activities" asp-action="Delete" asp-route-id="@Model.Id">Radera</a>
+            </div>
+        </div>
+    }
+</div>
+<div id="@("activitybodydestination"+Model.Id)" class="collapse">
+</div>

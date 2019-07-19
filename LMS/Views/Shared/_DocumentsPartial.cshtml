@@ -1,0 +1,25 @@
+﻿@model IEnumerable<LMS.Core.Models.Document>
+
+@foreach (var item in Model)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-7 p-0">
+                <a asp-controller="Documents" asp-action="Download"
+                   asp-route-filename="@item.Name">
+                    @item.Name
+                </a>
+            </div>
+            <div>
+
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-outline-secondary" asp-controller="Documents" asp-action="Details" asp-route-id="@item.Id">Visa</a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Lärare"))
+                    {
+                        <a class="btn btn-sm btn-outline-secondary" asp-controller="Documents" asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

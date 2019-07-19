@@ -1,0 +1,18 @@
+﻿@page
+@model LogoutModel
+@{
+    ViewData["Title"] = "Utloggad";
+}
+
+    <header class="text-center">
+        <br />
+        <br />
+        <br />
+        <br />
+        <h1>@ViewData["Title"]</h1>
+        <p>Du har loggat ut från denna sida.</p>
+        <h5>Välkommen åter!</h5>
+        <br />
+        <a class="btn btn-outline-secondary" asp-area="" asp-controller="Courses" asp-action="MainIndex">Logga in igen</a>
+
+    </header>
